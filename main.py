@@ -35,103 +35,16 @@ frame_height = 32
 
 black = graphics.create_pen(0,0,0)
 
-class frame:
-    def __init__(self, frame_x, frame_y):
-        self.frame_x = frame_x
-        self.frame_y = frame_y
-
-stockingframes = []
-# describe as index from 0 - 3
-stockingframes.append(frame (0, 0))
-stockingframes.append(frame (1, 0))
-stockingframes.append(frame (2, 0))
-stockingframes.append(frame (3, 0))
-stockingframes.append(frame (0, 0))
-stockingframes.append(frame (1, 0))
-stockingframes.append(frame (2, 0))
-stockingframes.append(frame (3, 0))
-
-santaframes = []
-# describe as index from 0 - 3
-santaframes.append(frame (0, 1))
-santaframes.append(frame (1, 1))
-santaframes.append(frame (2, 1))
-santaframes.append(frame (3, 1))
-santaframes.append(frame (0, 1))
-santaframes.append(frame (1, 1))
-santaframes.append(frame (2, 1))
-santaframes.append(frame (3, 1))
-
-snowmanframes = []
-# describe as index from 0 - 3
-snowmanframes.append(frame (0, 2))
-snowmanframes.append(frame (1, 2))
-snowmanframes.append(frame (2, 2))
-snowmanframes.append(frame (3, 2))
-snowmanframes.append(frame (0, 2))
-snowmanframes.append(frame (1, 2))
-snowmanframes.append(frame (2, 2))
-snowmanframes.append(frame (3, 2))
-
-snowflakeframes = []
-# describe as index from 0 - 3
-snowflakeframes.append(frame (0, 3))
-snowflakeframes.append(frame (1, 3))
-snowflakeframes.append(frame (2, 3))
-snowflakeframes.append(frame (3, 3))
-snowflakeframes.append(frame (0, 3))
-snowflakeframes.append(frame (1, 3))
-snowflakeframes.append(frame (2, 3))
-snowflakeframes.append(frame (3, 3))
-
-candycaneframes = []
-# describe as index from 0 - 3
-candycaneframes.append(frame (0, 4))
-candycaneframes.append(frame (1, 4))
-candycaneframes.append(frame (2, 4))
-candycaneframes.append(frame (3, 4))
-candycaneframes.append(frame (3, 4))
-candycaneframes.append(frame (2, 4))
-candycaneframes.append(frame (1, 4))
-candycaneframes.append(frame (0, 4))
-
-hollyframes = []
-# describe as index from 0 - 3
-hollyframes.append(frame (0, 5))
-hollyframes.append(frame (1, 5))
-hollyframes.append(frame (2, 5))
-hollyframes.append(frame (3, 5))
-hollyframes.append(frame (3, 5))
-hollyframes.append(frame (2, 5))
-hollyframes.append(frame (1, 5))
-hollyframes.append(frame (0, 5))
-
-mistletoeframes = []
-# describe as index from 0 - 3
-mistletoeframes.append(frame (0, 6))
-mistletoeframes.append(frame (1, 6))
-mistletoeframes.append(frame (2, 6))
-mistletoeframes.append(frame (3, 6))
-mistletoeframes.append(frame (3, 6))
-mistletoeframes.append(frame (2, 6))
-mistletoeframes.append(frame (1, 6))
-mistletoeframes.append(frame (0, 6))
-
-baubleframes = []
-# describe as index from 0 - 3
-baubleframes.append(frame (0, 7))
-baubleframes.append(frame (1, 7))
-baubleframes.append(frame (2, 7))
-baubleframes.append(frame (3, 7))
-baubleframes.append(frame (0, 7))
-baubleframes.append(frame (1, 7))
-baubleframes.append(frame (2, 7))
-baubleframes.append(frame (3, 7))
-
-faceframes =["stockingframes", "santaframes", "snowmanframes", "snowflakeframes", "candycaneframes", "hollyframes", "mistletoeframes", "baubleframes"]
-
-selected_frame = random.choice(faceframes)
-print(f"Selected frame: {selected_frame}")
+anims = [
+            [0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3],
+            [0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3],
+            [0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3],
+            [0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3],
+            [0,1,2,3,3,2,1,0,0,1,2,3,3,2,1,0],
+            [0,1,2,3,3,2,1,0,0,1,2,3,3,2,1,0],
+            [0,1,2,3,3,2,1,0,0,1,2,3,3,2,1,0],
+            [0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3]
+        ]
 
 busy = False
 
@@ -144,53 +57,39 @@ def JumpScare():
     ####wp.play('laugh/LAUGH-1.wav', loop=1)
     #wp.play(random.choice(LAUGH_SOUND), loop=1)
 
-    #pick random face
-    selected_frame = random.choice(faceframes)
-    print(f"Selected frame: {selected_frame}")
-    # Use the correct list of frames based on selected_frame
-    if selected_frame == "stockingframes":
-        frame_list = stockingframes
-    elif selected_frame == "santaframes":
-        frame_list = santaframes
-    elif selected_frame == "snowmanframes":
-        frame_list = snowmanframes
-    elif selected_frame == "snowflakeframes":
-        frame_list = snowflakeframes
-    elif selected_frame == "candycaneframes":
-        frame_list = candycaneframes
-    elif selected_frame == "hollyframes":
-        frame_list = hollyframes
-    elif selected_frame == "mistletoeframes":
-        frame_list = mistletoeframes
-    elif selected_frame == "baubleframes":
-        frame_list = baubleframes
-    else:
-        frame_list = []  # Handle the case when selected_frame is invalid
+    #pick random anim
+    selected_anim_number = random.randint(0, len(anims))
+    selected_anim = anims[selected_anim_number]
+    frame_count = len(selected_anim)
 
+    print(f"Selected frame: {selected_anim_number}")
 
     # set initial brightness to 0
     brightness = 0
     gu.set_brightness(brightness)
+    gu.update(graphics)
 
-    for index, frame in enumerate(frame_list):
+    for index in range(frame_count):
 
         # Clear the display before drawing the new frame
         graphics.set_pen(black)
         graphics.clear()
 
+        frame = selected_anim[index]
+
         # Decode and display the current frame
-        png.decode(0, 0, source=(frame.frame_x * frame_width, frame.frame_y * frame_height, frame_width, frame_height), scale=(1, 1), rotate=0)
+        png.decode(0, 0, source=(frame * frame_width, selected_anim_number * frame_height, frame_width, frame_height), scale=(1, 1), rotate=0)
 
         gu.update(graphics)
 
-        if index == 0:
+        if index < 2:
             for _ in range(10):
                 brightness += 0.1
                 gu.set_brightness(brightness)
                 gu.update(graphics)
                 time.sleep(0.01)
 
-        elif index == 7:
+        elif index > frame_count - 3:
             for _ in range(10):
                 brightness -= 0.1
                 gu.set_brightness(brightness)
@@ -215,4 +114,8 @@ while True:
     if pir.value() == 1:
         if not busy:
             JumpScare()
+
+
+
+
 
