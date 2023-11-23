@@ -1,5 +1,5 @@
 # unicornament ❄️🎅⛄🎄
-Pimoroni Cosmic Unicorn Christmas themed, PIR or Doplar Radar enabled.
+Pimoroni Cosmic Unicorn Christmas themed, PIR or Doppler Radar enabled.
 Many thanks to my friend pb and pimoroni
  
 This is further development of the Halloweenicorn script found here: https://github.com/mrglennjones/Halloweenicorn
