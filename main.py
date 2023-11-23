@@ -25,7 +25,7 @@ png = PNG(graphics)
 #png.open_file("/s4m_ur4i-pirate-characters.png")
 png.open_file("/faces.png")
 
-gu.set_volume(0.1) 
+gu.set_volume(0.1)
 LAUGH_SOUND = [ 'laugh/%s'%f for f in os.listdir('laugh') ]
 print (LAUGH_SOUND)
 
@@ -139,11 +139,11 @@ def JumpScare():
     global busy
     #gu.set_brightness(max(.15,min(1.,gu.light()/100)))
     busy = True
-    #gu.set_volume(0.1) 
+    #gu.set_volume(0.1)
     #play random sound
     ####wp.play('laugh/LAUGH-1.wav', loop=1)
     #wp.play(random.choice(LAUGH_SOUND), loop=1)
-    
+
     #pick random face
     selected_frame = random.choice(faceframes)
     print(f"Selected frame: {selected_frame}")
@@ -168,30 +168,45 @@ def JumpScare():
         frame_list = []  # Handle the case when selected_frame is invalid
 
 
-    for frame in frame_list:
-        #gu.set_brightness(0.6)
+    # set initial brightness to 0
+    brightness = 0
+    gu.set_brightness(brightness)
+
+    for index, frame in enumerate(frame_list):
+
         # Clear the display before drawing the new frame
         graphics.set_pen(black)
         graphics.clear()
 
         # Decode and display the current frame
         png.decode(0, 0, source=(frame.frame_x * frame_width, frame.frame_y * frame_height, frame_width, frame_height), scale=(1, 1), rotate=0)
-        #png.decode(0, 0, source=(frame.frame_x * frame_width, frame.frame_y * frame_height, frame_width, frame_height), scale=(1, 1), rotate=0)
-        
-        #auto set brightness from light sensor        
-        #gu.set_brightness(max(.15,min(1.,gu.light()/600)))
-        #gu.set_brightness(max(.15,min(1.,gu.light()/100)))
-        
-        gu.update(graphics)        
-        time.sleep(0.1)  # Adjust speed of anim
+
+        gu.update(graphics)
+
+        if index == 0:
+            for _ in range(10):
+                brightness += 0.1
+                gu.set_brightness(brightness)
+                gu.update(graphics)
+                time.sleep(0.01)
+
+        elif index == 7:
+            for _ in range(10):
+                brightness -= 0.1
+                gu.set_brightness(brightness)
+                gu.update(graphics)
+                time.sleep(0.01)
+
+        else:
+            time.sleep(0.1)  # Adjust speed of anim
 
     # Clear display
     graphics.set_pen(black)
     graphics.clear()
     gu.update(graphics)
-    
+
     time.sleep(5) # Time out so it does not trigger again immediately
-    
+
     busy = False
 
 
@@ -200,7 +215,4 @@ while True:
     if pir.value() == 1:
         if not busy:
             JumpScare()
-        
-
-    
 
