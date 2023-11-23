@@ -59,11 +59,11 @@ def JumpScare():
 
     #pick random anim
     foo = len(anims) - 1
-    selected_anim_number = random.randint(0, foo)
+    selected_anim_number = random.randint(0, (len(anims) - 1))
     selected_anim = anims[selected_anim_number]
     frame_count = len(selected_anim)
 
-    print(f"foo: {foo}")
+    #print(f"foo: {foo}")
     print(f"Selected frame: {selected_anim_number}")
 
     # set initial brightness to 0
