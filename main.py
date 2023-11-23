@@ -58,10 +58,12 @@ def JumpScare():
     #wp.play(random.choice(LAUGH_SOUND), loop=1)
 
     #pick random anim
-    selected_anim_number = random.randint(0, len(anims))
+    foo = len(anims) - 1
+    selected_anim_number = random.randint(0, foo)
     selected_anim = anims[selected_anim_number]
     frame_count = len(selected_anim)
 
+    print(f"foo: {foo}")
     print(f"Selected frame: {selected_anim_number}")
 
     # set initial brightness to 0
@@ -114,8 +116,3 @@ while True:
     if pir.value() == 1:
         if not busy:
             JumpScare()
-
-
-
-
-
